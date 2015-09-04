@@ -206,10 +206,10 @@ public int deleteData(int num) throws ClassNotFoundException, SQLException{
 		String sql = "";
 		
 		try{
-			sql = "select num, name,subject,content, TO_CHAR(dated,'YYYY-MM-DD')as dated, ipaddr, hitcount"
+			sql = "select num, name,subject,content, DATE_FORMAT(SYSDATE(),'%Y-%m-%d')as dated, ipaddr, hitcount "
 					+ "from board where num = ?";
 			pstmt = c.prepareStatement(sql);
-			pstmt.setInt(1,  num);
+			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()){
@@ -233,7 +233,6 @@ public int deleteData(int num) throws ClassNotFoundException, SQLException{
 	}
 	
 	//수정메소드
-	
 	public int updateData(BoardVO vo) throws ClassNotFoundException, SQLException{
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection c = DriverManager.getConnection("jdbc:mysql://localhost/toby","root","1111");

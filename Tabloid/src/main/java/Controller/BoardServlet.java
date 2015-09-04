@@ -99,6 +99,25 @@ public class BoardServlet extends HttpServlet{
 			
 			//페이지 이동 전용 메소드 호출
 			forward(req, resp, url);
+		}else if(uri.indexOf("created.do")!=-1){
+			//자유게시판 글쓰기 화면
+			url = "BoardInsert.jsp";
+			
+			forward(req,resp,url);
+		}else if(uri.indexOf("content.do")!=-1){
+			
+			//글번호 수신
+			int num = Integer.parseInt(req.getParameter("num"));
+			
+			//자료 읽어오기
+			
+			BoardVO vo = dao.getReadData(num);
+			
+			req.setAttribute("vo",vo);
+			
+			url = "BoardContent.jsp";
+			
+			forward(req, resp, url);
 			
 		}else if(uri.indexOf("insert.do")!= -1){
 			
